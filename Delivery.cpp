@@ -3,6 +3,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include<limits>
 
 class DeliveryOrder {
 public:
@@ -95,6 +96,16 @@ int main() {
                   << "2. Update order status\n"
                   << "3. Exit\n";
         std::cin >> choice;
+        int size = 3;
+        while (std::cin.fail() || choice <= 0 || choice > static_cast<int>(size))
+        {
+            std::cout << "Invalid input. Please enter a valid option within the range of the Options: ";
+            std::cin.clear();
+
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+            std::cin >> choice;
+        }
 
         switch (choice) {
             case 1:
@@ -108,6 +119,16 @@ int main() {
                 std::string newStatus;
                 std::cout << "Enter the Order ID to update its status: ";
                 std::cin >> orderId;
+                
+        while (std::cin.fail() || orderId <= 0 || orderId > static_cast<int>(orders.size()))
+        {
+            std::cout << "Invalid input. Please enter a valid option within the range of the Options: ";
+            std::cin.clear();
+
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+            std::cin >> orderId;
+        }
 
                 bool found = false;
                 for (auto& order : orders) {
