@@ -1,0 +1,6 @@
+order id,name,address,price,status
+1,Vishal,HSR Layout,500,Delivered
+2,Shreya,Sarjapur,600,Delivered
+3,Sahana,BTM,800,Delivered
+4,Ram,ECity,900,Pending
+5,Lakshmi,Koramangala,250,Pending
