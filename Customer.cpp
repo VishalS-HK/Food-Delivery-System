@@ -97,21 +97,23 @@ public:
             int slNo;
             cin >> slNo;
 
-            if (cin.fail()) {
-            cout << "Invalid input. Please enter a valid Sl No." << endl;
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            continue;
-            }
-            
-            if (slNo <= 0 || slNo > static_cast<int>(menu.size())) {
-                cout << "Invalid Sl No. Please try again." << endl;
-                continue;
+            while (cin.fail() || slNo <= 0 || slNo > static_cast<int>(menu.size())) {
+                cout << "Invalid input. Please enter a valid Sl No within the range of the menu: ";
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cin >> slNo;
             }
             
             cout << "Enter the quantity: ";
             int quantity;
             cin >> quantity;
+
+            while (cin.fail() || quantity <= 0) {
+                cout << "Invalid input. Please enter a valid positive quantity: ";
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cin >> quantity;
+            }
 
             FoodItem selectedItem = menu[slNo - 1];
             selectedItem.quantity = quantity;
@@ -119,6 +121,13 @@ public:
 
             cout << "Do you want to add more items? (y/n): ";
             cin >> choice;
+
+            while (cin.fail() || (choice != 'y' && choice != 'Y' && choice != 'n' && choice != 'N')) {
+            cout << "Invalid input. Please enter 'y' or 'n' to add more items: ";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cin >> choice;
+            }
         } while (choice == 'y' || choice == 'Y');
     }
 };
@@ -167,20 +176,29 @@ int main() {
     }
 
     string custName, address;
-
+    cout << "\033[1;33m";
     cout << setw(80) << "**********************************************" << endl;
     cout << setw(80) << "\t                    Hey There 👋                " << endl;                 
     cout << setw(80) << " *                  WELCOME TO                *" << endl;
     cout << setw(80) << " *          ONLINE FOOD DELIVERY SYSTEM       *" << endl;
     cout << setw(80) << "**********************************************" << endl;
     cout << endl;
+    cout << "\033[0m";
     cout << "Please log in to continue." << endl;
 
     cout << "Please enter your name: ";
     getline(cin, custName);
+    while (cin.fail() || custName.empty() || any_of(custName.begin(), custName.end(), ::isdigit)) {
+        cout << "Invalid name. Please enter a valid name (only alphabets are allowed): ";
+        getline(cin, custName);
+    }
 
     cout << "Please enter your address: ";
     getline(cin, address);
+    while (cin.fail() || address.empty() || any_of(address.begin(), address.end(), ::isdigit)) {
+        cout << "Invalid address. Please enter a valid address (only alphabets are allowed): ";
+        getline(cin, address);
+    }
 
     FoodDeliverySystem::displayMenu(menu);
 
