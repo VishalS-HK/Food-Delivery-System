@@ -102,14 +102,33 @@ namespace MenuManagement {
             int serialNo;
             std::cout << "Enter the serial number of the item you want to update: ";
             std::cin >> serialNo;
+            while (std::cin.fail() || serialNo <= 0 || serialNo > static_cast<int>(menuItems.size()))
+            {
+                std::cout << "Invalid input. Please enter a valid option within the range of the Options: ";
+                std::cin.clear();
+
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+                std::cin >> serialNo;
+            }
             
-            int n;
+            int n,m=3;
             std::cout << "Which do you wish to update: " << std::endl;
             std::cout << "1. Food item name\n";
             std::cout << "2. Price\n";
             std::cout << "3. Both\n";
             std::cin.ignore();
             std::cin >> n;
+            while (std::cin.fail() || n <= 0 || n > static_cast<int>(m))
+            {
+                std::cout << "Invalid input. Please enter a valid option within the range of the Options: ";
+                std::cin.clear();
+
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+                std::cin >> n;
+            }
+
             
             bool found=false;
             for (auto& item : menuItems)
@@ -127,6 +146,15 @@ namespace MenuManagement {
                     {
                         std::cout << "Enter the new price for the item: ";
                         std::cin >> item.price;
+                        while (std::cin.fail() || item.price <= 0)
+                        {
+                            std::cout << "Invalid input. Please enter a valid option within the range of the Options: ";
+                            std::cin.clear();
+
+                            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+                            std::cin >> item.price;
+                        }
                     }
                     else if (n == 3)
                     {
@@ -135,6 +163,15 @@ namespace MenuManagement {
                         std::getline(std::cin, item.foodItem);
                         std::cout << "Enter the new price for the item: ";
                         std::cin >> item.price;
+                        while (std::cin.fail() || item.price <= 0)
+                        {
+                            std::cout << "Invalid input. Please enter a valid option within the range of the Options: ";
+                            std::cin.clear();
+
+                            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+                            std::cin >> item.price;
+                        }
                     }
 
                     std::cout << "Item updated successfully.\n";
@@ -155,6 +192,15 @@ namespace MenuManagement {
             int serialNo;
             std::cout << "Enter the serial number of the item you want to delete: ";
             std::cin >> serialNo;
+             while (std::cin.fail() || serialNo <= 0 || serialNo > static_cast<int>(menuItems.size()))
+            {
+                std::cout << "Invalid input. Please enter a valid option within the range of the Options: ";
+                std::cin.clear();
+
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+                std::cin >> serialNo;
+            }
 
             auto it = std::remove_if(menuItems.begin(), menuItems.end(), [serialNo](const MenuItem& item)
                 { return item.serialNumber == serialNo; });
@@ -176,11 +222,29 @@ namespace MenuManagement {
             MenuItem newItem;
             std::cout << "Enter the serial number for the new item: ";
             std::cin >> newItem.serialNumber;
+            while (std::cin.fail() || newItem.serialNumber <= 0)
+            {
+                std::cout << "Invalid input. Please enter a valid option within the range of the Options: ";
+                std::cin.clear();
+
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+                std::cin >> newItem.serialNumber;
+            }
             std::cout << "Enter the name for the new item: ";
             std::cin.ignore();
             std::getline(std::cin, newItem.foodItem);
             std::cout << "Enter the price for the new item: ";
             std::cin >> newItem.price;
+            while (std::cin.fail() || newItem.price <= 0)
+            {
+                std::cout << "Invalid input. Please enter a valid option within the range of the Options: ";
+                std::cin.clear();
+
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+                std::cin >> newItem.price;
+            }
             menuItems.push_back(newItem);
             writeMenuToCSV();
             std::cout << "New item added successfully.\n";
@@ -205,7 +269,17 @@ int main()
         std::cout << "5. Exit\n";
         std::cout << "Enter your choice: ";
         std::cin >> choice;
+        int size = 5;
+        while (std::cin.fail() || choice <= 0 || choice > static_cast<int>(size))
+        {
+            std::cout << "Invalid input. Please enter a valid option within the range of the Options: ";
+            std::cin.clear();
 
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+            std::cin >> choice;
+        }
+        
         switch (choice)
         {
         case 1:
