@@ -44,8 +44,3 @@ The Online Food Delivery System is a C++ project developed during the "Object-Or
 git clone https://github.com/Sahana-Math/Food-Delivery-System.git
 
 ```
-
-## Contributors
-<a href="https://github.com/Sahana-Math/Food-Delivery-System/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Sahana-Math/Food-Delivery-System" />
-</a>
